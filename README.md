@@ -11,14 +11,14 @@ This tutorial will serve as a quick guide for getting svelTest programs up and r
 6. [I/O](#io)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.1 [Input](#input)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [Output](#output)
-<br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [readlines()](#readlines) CHECK THIS
+<br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [readlines()](#readlines)
 7. [Return & Assert](#return--assert)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;7.1 [verbose](#verbose)
 8. [Main](#main)
 9. [If/Else](#ifelse)
 10. [Another Example: Add](#another-example-add)
 11. [Arrays](#arrays)
-12. [Writing Svelter Code: Looking at Add Again](#writing-svelter-code-looking-at-add-again) CHECK THIS
+12. [Writing Svelter Code: Looking at Add Again](#writing-svelter-code-looking-at-add-again)
 13. [Conclusion](#conclusion)
 
 # Introduction
