@@ -256,8 +256,8 @@ int addTestSuite() {
 	input[] inArray = {in1, in2};
 	output[] outArray = {};
 
-	outArray.insert(0, out1);
-	outArray.insert(1, out2);
+	outArray.append(out1);
+	outArray.append(out2);
 
 	for(int i = 0; i < inArray.size(); i = i+1) {
 		if (add.assert(inArray[i], outArray[i])) {
@@ -290,11 +290,11 @@ input in2 = (-2, 2);
 output out2 = 0;
 input[] inArray = {in1, in2};
 output[] outArray = {};
-outArray.insert(0, out1);
-outArray.insert(1, out2);
+outArray.append(out1);
+outArray.append(out2);
 ```
 
-In this section we create two `input`s that have two `int`s enclosed in parentheses and separated by commas. We also make two corresponding `output`s. The following lines show how to add objects to arrays. In the input array, we add the already created objects to `inArray` in the same line as the declaration. In the output array, we declare the array and use `insert()` to add the two `output`s into the array. Note that we must initialize `outArray` as empty with curly brackets in order to insert values into it.
+In this section we create two `input`s that have two `int`s enclosed in parentheses and separated by commas. We also make two corresponding `output`s. The following lines show how to add objects to arrays. In the input array, we add the already created objects to `inArray` in the same line as the declaration. In the output array, we declare the array and use `append()` to add the two `output`s to the end of the array. Note that we must initialize `outArray` as empty with curly brackets in order to append or insert values into it.
 
 ```java
 for(int i = 0; i < inArray.size(); i++) {
@@ -309,6 +309,13 @@ svelTest supports `for` loops that have 3 parameters: one that initializes a cou
 The end of the method returns `addSuccessCounter`.
 
 The `main` method of this .svel file runs `addTestSuite()` and prints out that the cases were successful if it passed two out of two tests.
+
+A last note on arrays: Other supported array functions are `remove()`, `insert()`, `size()`, and `replace()`. The prototypes are outlined below:
+
+* `a.remove(int index)` 
+* `a.insert(int index, object o)`
+* `a.size()`
+* `a.replace(int index, object o)`
 
 # Writing Svelter Code: Looking at Add Again
 You might notice that our `add.svel` program looks a little bulky: only 10 lines of Java code to test led to over 40 lines of svelTest code. The `add.svel` program was intentionally written to be very clear, but a lot of the idioms can be condensed. Take a look at our svelter version:
