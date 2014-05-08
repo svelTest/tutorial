@@ -33,6 +33,11 @@
         <h1>
 <a name="sveltest-language-tutorial" class="anchor" href="#sveltest-language-tutorial"><span class="octicon octicon-link"></span></a>svelTest Language Tutorial</h1>
 
+<p>This tutorial will serve as a quick guide for getting svelTest programs up and running. All of the code used throughout the tutorial can be found <a href="https://github.com/svelTest/svelTest/tree/master/tutorial">here</a>.</p>
+
+<h1>
+<a name="table-of-contents" class="anchor" href="#table-of-contents"><span class="octicon octicon-link"></span></a>Table of Contents</h1>
+
 <ol>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#setup">Setup</a></li>
@@ -40,25 +45,30 @@
 <li><a href="#file">File</a></li>
 <li>
 <a href="#funct">Funct</a>
-<br>     5.1 <a href="#what-the-funct">What the Funct?</a>
+<br>    5.1 <a href="#what-the-funct">What the Funct?</a>
 </li>
 <li>
-<a href="#io">I/0</a>
-<br>     6.1 <a href="#input">Input</a>
-<br>     6.2 <a href="#output">Output</a>
+<a href="#io">I/O</a>
+<br>    6.1 <a href="#input">Input</a>
+<br>    6.2 <a href="#output">Output</a>
+<br>    6.2 <a href="#readlines">readlines()</a>
 </li>
-<li><a href="#return--assert">Return &amp; Assert</a></li>
+<li>
+<a href="#return--assert">Return &amp; Assert</a>
+<br>    7.1 <a href="#verbose">verbose</a>
+</li>
 <li><a href="#main">Main</a></li>
 <li><a href="#ifelse">If/Else</a></li>
 <li><a href="#another-example-add">Another Example: Add</a></li>
 <li><a href="#arrays">Arrays</a></li>
+<li><a href="#writing-svelter-code-looking-at-add-again">Writing Svelter Code: Looking at Add Again</a></li>
 <li><a href="#conclusion">Conclusion</a></li>
 </ol><h1>
 <a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
 <p>The svelTest Language Tutorial will serve as a quick guide for getting svelTest programs up and running. This guide will go through several major aspects of the svelTest language by looking at various simple examples.</p>
 
-<p>The svelTest programming language aims to simplify the seemingly complex process of testing production code. Our language targets any programmer looking for a simplified way to test source code to their specifications, in their own environment.</p>
+<p>The svelTest programming language aims to simplify the complex process of testing production code. Our language targets any programmer looking for a simplified way to test source code to their specifications, in their own environment.</p>
 
 <p>The purpose of this tutorial is to introduce the user to the basics of svelTest, allowing them to easily pick up svelTest syntax and code style. These examples concentrate on the basics of the language like variable declaration, arithmetic operations, loading source code files, and manipulating test case output.</p>
 
@@ -69,99 +79,117 @@
 <h1>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h1>
 
-<p>svelTest does not require any outside packages or installers. The compiler was developed under Python version 2.7.3, so it will work best with that (but any Python 2.x version should be fine). Fire up your favorite text editor and you’re ready to start programming! We do however, expect if you want to test Java programs that you to have configured your Java environment properly, and can compile and run Java programs from your favorite shell using javac and java respectively.  svelTest currently supports Java SE 6. To check your Java version, type java -version into your shell.  If you see java version "1.6.0_XX", you’re in luck! If you see java version 1.7.X or 1.8.X, please make sure to roll back to Java 6. We also support Python 2.x and a valid C99 compiler; you can perform similar checks for these dependencies. For the rest of this tutorial, we will use Java.</p>
+<p>svelTest does not require any outside packages or installers. The compiler was developed under Python version 2.7.3, so it will work best with that (but any Python 2.7.x version should be fine). Fire up your favorite text editor and you’re ready to start programming! We do, however, expect if you want to test Java programs that you to have configured your Java environment properly, and can compile and run Java programs from your favorite shell using javac and java respectively.  svelTest currently supports Java SE 6. To check your Java version, type java -version into your shell.  If you see java version "1.6.0_XX", you’re in luck! If you see java version 1.7.X or 1.8.X, please make sure to roll back to Java 6. We also support Python 2.7.x and any version of gcc that supports C99; you can perform similar checks for these dependencies. For the rest of this tutorial, we will use Java.</p>
 
 <h1>
 <a name="hello-world" class="anchor" href="#hello-world"><span class="octicon octicon-link"></span></a>Hello World</h1>
 
 <p>To get familiar with svelTest syntax, we can look at the svelTest’s interpretation of Hello World. This program prints “Hello World!” to the console.</p>
 
-<div class="highlight highlight-java"><pre><span class="cm">/* </span>
-<span class="cm"> * hello.svel</span>
-<span class="cm"> * prints ‘Hello World!’ to console </span>
-<span class="cm"> */</span>
-<span class="n">main</span><span class="o">()</span>
-<span class="o">{</span>
-    <span class="n">string</span> <span class="n">hello</span> <span class="o">=</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="o">!</span><span class="err">”</span><span class="o">;</span>
-    <span class="n">print</span> <span class="n">hello</span><span class="o">;</span>
+<div class="highlight highlight-java"><pre><span class="c1">// hello.svel</span>
+
+<span class="c1">// prints "Hello World!" to console </span>
+<span class="n">lang</span> <span class="o">=</span> <span class="n">None</span><span class="o">;</span>
+<span class="n">main</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">string</span> <span class="n">hello</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="o">;</span>
+    <span class="n">print</span><span class="o">(</span><span class="n">hello</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>Each svelTest file needs a <code>main</code> function to run a program. Each declaration is ended with a semicolon; whitespace and indentation do not matter to the compiler. To declare an object like a <code>string</code> or an <code>int</code>, much like Java, you need to first declare the type, then name the object. A string literal is indicated by quotation marks.</p>
+<p>Each svelTest program needs a <code>lang</code> declaration and a <code>main</code> function to run a program. (In this case, since we’re not testing any code, we use the <code>None</code> keyword; we’ll discuss lang more in our next example.) Each declaration is ended with a semicolon; whitespace and indentation do not matter to the compiler. To declare an object like a <code>string</code> or an <code>int</code>, much like Java, you need to first declare the type, then name the object. A string literal is indicated by quotation marks.</p>
 
 <p><code>print</code> is a reserved word in svelTest that prints to the console.  </p>
 
 <p>Though <code>hello.svel</code> is a valid svelTest program, it does not really show what the language can do. Let’s look at Java’s Hello World. </p>
 
-<div class="highlight highlight-java"><pre><span class="cm">/* Hello.java</span>
-<span class="cm"> * prints ‘Hello World!’ to console </span>
-<span class="cm"> */</span>
+<div class="highlight highlight-java"><pre><span class="c1">// Hello.java</span>
+
+<span class="c1">// prints "Hello World!" to console</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hello</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span> <span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
-        <span class="n">String</span> <span class="n">hello</span> <span class="o">=</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="o">!</span><span class="err">”</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">hello</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="o">;</span>
         <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">hello</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>A svel program to test the output of <code>Hello.java</code> (which should be “Hello World!”) would look like this:</p>
+<p>A svelTest program to test the output of <code>Hello.java</code> (which should be “Hello World!”) would look like this:</p>
 
-<div class="highlight highlight-java"><pre><span class="cm">/* helloJava.svel</span>
-<span class="cm"> * tests Hello.java </span>
-<span class="cm"> */</span>
-<span class="kt">boolean</span> <span class="nf">helloWorldTest</span><span class="o">()</span> 
-<span class="o">{</span>
-    <span class="n">file</span> <span class="n">helloFile</span> <span class="o">=</span> <span class="err">“</span><span class="n">Hello</span><span class="o">.</span><span class="na">java</span><span class="err">”</span><span class="o">;</span>
-    <span class="n">funct</span> <span class="n">helloMain</span> <span class="o">=</span> <span class="o">{</span><span class="n">__main__</span><span class="o">,</span> <span class="o">(</span><span class="n">j_String</span><span class="o">[]),</span> <span class="n">helloFile</span><span class="o">};</span>
-    <span class="n">input</span> <span class="n">in</span> <span class="o">=</span> <span class="o">();</span>
-    <span class="n">output</span> <span class="n">out</span> <span class="o">=</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span><span class="o">!</span><span class="err">”</span><span class="o">;</span>
+<div class="highlight highlight-java"><pre><span class="c1">// helloJava.svel</span>
 
-    <span class="k">return</span> <span class="n">helloMain</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">in</span><span class="o">,</span> <span class="n">out</span><span class="o">);</span>
+<span class="c1">// tests Hello.java</span>
+<span class="n">lang</span> <span class="o">=</span> <span class="n">Java</span><span class="o">;</span>
+
+<span class="kt">boolean</span> <span class="nf">helloWorldTest</span><span class="o">()</span> <span class="o">{</span>
+<span class="n">file</span> <span class="n">helloFile</span> <span class="o">=</span> <span class="s">"HelloWorld.java"</span><span class="o">;</span>
+<span class="n">funct</span> <span class="n">helloMain</span> <span class="o">=</span> <span class="o">{</span><span class="n">__main__</span><span class="o">,</span> <span class="o">(</span><span class="n">j_String</span><span class="o">[]),</span> <span class="n">helloFile</span><span class="o">};</span>
+<span class="n">input</span> <span class="n">_in</span> <span class="o">=</span> <span class="o">();</span>
+<span class="n">output</span> <span class="n">out</span> <span class="o">=</span> <span class="s">"Hello World!"</span><span class="o">;</span>
+
+    <span class="k">return</span> <span class="n">helloMain</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">_in</span><span class="o">,</span> <span class="n">out</span><span class="o">);</span>
 <span class="o">}</span>
 
-<span class="n">main</span><span class="o">()</span>
-<span class="o">{</span>
+<span class="n">main</span><span class="o">()</span> <span class="o">{</span>
     <span class="k">if</span> <span class="o">(</span><span class="n">helloWorldTest</span><span class="o">())</span> <span class="o">{</span>
-        <span class="n">print</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span> <span class="n">passed</span><span class="o">!</span><span class="err">”</span><span class="o">;</span>
+        <span class="n">print</span><span class="o">(</span><span class="s">"Hello World passed!"</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="n">print</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span> <span class="n">failed</span><span class="o">.</span><span class="err">”</span><span class="o">;</span>
+        <span class="n">print</span><span class="o">(</span><span class="s">"Hello World failed."</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>After you compile <code>helloJava.svel</code>, two files will be produced: <code>run.sh</code> and <code>test.py</code>. The <code>test.py</code> file does the grunt work of testing and comparing output; <code>run.sh</code> is a wrapper script that coordinates all the testing for you. Running <code>$ ./run.sh</code> will print “Hello World passed!” to the console. </p>
+<p>Compiling your svelTest program is easy. You should have the <code>lib</code> folder containing the compile script; let’s say you also have another folder called <code>tutorial</code>. (We have this structure on our repo <a href="https://github.com/svelTest/svelTest">here</a>.) Navigate into <code>lib</code>, then type:</p>
 
-<p>Let’s go through the program line by line, starting with the following:</p>
+<pre><code>./compile.sh ../tutorial/helloJava.svel
+</code></pre>
 
-<div class="highlight highlight-java"><pre><span class="c1">// tests Hello.java</span>
-</pre></div>
+<p>This will produce <code>helloJava.py</code> in the testing folder. The <code>helloJava.py</code> file does the grunt work of testing and comparing output as well as manipulating that output however you wish. All you have to do is change into the testing directory and run the compiled Python program:</p>
 
-<p>Comments in svelTest are indicated by a <code>//</code> or  <code>/* ... */</code> for block comments; comments cannot be nested. The following are all valid comments:</p>
+<pre><code>cd ../testing
+python helloJava.py
+</code></pre>
 
-<div class="highlight highlight-java"><pre><span class="c1">// this is valid</span>
+<h4>
+<a name="lets-go-through-the-program-line-by-line-starting-with-the-following" class="anchor" href="#lets-go-through-the-program-line-by-line-starting-with-the-following"><span class="octicon octicon-link"></span></a>Let’s go through the program line by line, starting with the following:</h4>
 
-<span class="cm">/* this is valid too */</span>
+<pre><code>//tests Hello.java
+</code></pre>
 
-<span class="cm">/* this is </span>
-<span class="cm">*  also valid</span>
-<span class="cm">*/</span>
-</pre></div>
+<p>Comments in svelTest are indicated by a // or  /* ... */ for block comments; comments cannot be nested. The following are all valid comments:</p>
 
-<p>Next, we have:</p>
+<pre><code>// this is valid
 
-<div class="highlight highlight-java"><pre><span class="kt">boolean</span> <span class="nf">helloWorldTest</span> <span class="o">()</span>
-<span class="o">{</span>
+/* this is valid too */
+
+ /* this is 
+  * also valid
+  */
+</code></pre>
+
+<p><code>lang</code>, as we mentioned earlier, is the language specifier.</p>
+
+<pre><code>lang = Java;
+</code></pre>
+
+<p>In this case, we’re testing a Java program, so we must specify that <code>lang</code> equals <code>Java</code>. We also support <code>Python</code>, <code>C</code>, and <code>None</code>. These specifications determine which helper files to import to the compiled code; using <code>None</code> can avoid that overhead if it isn’t need.</p>
+
+<h4>
+<a name="next-we-have" class="anchor" href="#next-we-have"><span class="octicon octicon-link"></span></a>Next, we have:</h4>
+
+<div class="highlight highlight-java"><pre><span class="kt">boolean</span> <span class="nf">helloWorldTest</span> <span class="o">()</span> <span class="o">{</span>
     <span class="o">...</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>Methods in svelTest need to be declared with their return type; in this case, <code>helloWorldTest()</code> returns a <code>boolean</code>. Function definitions are enclosed by curly braces. If the svelTest method does not return a value, declare the method with the <code>void</code> return type.</p>
+<p>Methods in svelTest must be declared with their return type; in this case, <code>helloWorldTest()</code> returns a <code>boolean</code>. Function definitions are enclosed by curly braces. If the svelTest method does not return a value, declare the method with the <code>void</code> return type.</p>
+
+<p>Functions in svelTest must also be fully defined before they are used. Note that <code>main()</code> uses <code>helloWorldTest()</code>; if <code>helloWorldTest()</code> was not fully defined before <code>main()</code>, the compiler would throw an error.</p>
 
 <h1>
 <a name="file" class="anchor" href="#file"><span class="octicon octicon-link"></span></a>File</h1>
 
-<div class="highlight highlight-java"><pre><span class="n">file</span> <span class="n">helloFile</span> <span class="o">=</span> <span class="err">“</span><span class="o">../</span><span class="n">Hello</span><span class="o">.</span><span class="na">java</span><span class="err">”</span><span class="o">;</span>
-</pre></div>
+<pre><code>file helloFile = "../Hello.java";
+</code></pre>
 
 <p><code>file</code> is used to select the file you want to test; it is followed by the object name. On the right side of the equals, the name of the file is entered as a string literal. In this case, we’re making a <code>file</code> object called <code>helloFile</code> and indicating that the <code>Hello.java</code> file is one directory above the svelTest program.</p>
 
@@ -175,10 +203,10 @@
 
 <p>The <code>funct</code> type is easy to use and declare.</p>
 
-<div class="highlight highlight-java"><pre><span class="n">funct</span> <span class="n">helloMain</span> <span class="o">=</span> <span class="o">{</span><span class="n">__main__</span><span class="o">,</span> <span class="o">(</span><span class="n">j_String</span><span class="o">[]),</span> <span class="n">helloFile</span><span class="o">};</span>
-</pre></div>
+<pre><code>funct helloMain = {__main__, (j_String[]), helloFile};
+</code></pre>
 
-<p><code>funct</code> is used to select which method of the file to test. It requires the name of the method, the the formal parameter type(s) of the method (more parameters can be added, separated by commas), and the <code>file</code> containing the method. </p>
+<p><code>funct</code> is used to select which method of the file to test. It requires the name of the method, the the formal parameter type(s) of the method (more parameters can be added, separated by commas), and the file containing the method. </p>
 
 <h1>
 <a name="io" class="anchor" href="#io"><span class="octicon octicon-link"></span></a>I/O</h1>
@@ -186,35 +214,66 @@
 <h3>
 <a name="input" class="anchor" href="#input"><span class="octicon octicon-link"></span></a>Input</h3>
 
-<div class="highlight highlight-java"><pre><span class="n">input</span> <span class="n">in</span> <span class="o">=</span> <span class="o">();</span>
-</pre></div>
+<pre><code>input _in = ();
+</code></pre>
 
-<p><code>input</code> is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of <code>Hello.java</code> does not take any parameters.</p>
+<p><code>input</code> is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of <code>Hello.java</code> does not take any parameters. Note that we cannot call this input <code>in</code> but instead must call it <code>_in</code>; this is because <code>in</code> is a reserved keyword in svelTest programs. (See our <a href="https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing">Reference Manual</a> for a full list of reserved words.)</p>
 
-<h3>
-<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h3>
+<h1>
+<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h1>
 
-<pre><code>output out = “Hello World!”;
+<pre><code>output out = "Hello World!";
 </code></pre>
 
 <p><code>output</code> is use to denote the expected output of the method you are testing. An <code>output</code> can take the value of any type in the source programming language.</p>
 
+<h3>
+<a name="readlines" class="anchor" href="#readlines"><span class="octicon octicon-link"></span></a>readlines()</h3>
+
+<h4>
+<a name="while-we-dont-use-readlines-in-our-hellojavasvel-program-we-want-to-cover-it-briefly-in-our-discussion-of-file-io" class="anchor" href="#while-we-dont-use-readlines-in-our-hellojavasvel-program-we-want-to-cover-it-briefly-in-our-discussion-of-file-io"><span class="octicon octicon-link"></span></a>While we don’t use <code>readlines()</code> in our <code>helloJava.svel</code> program, we want to cover it briefly in our discussion of file I/O.</h4>
+
+<p>Take a look at the following snippet:</p>
+
+<pre><code>file outputs = "outputs.txt";
+output[] out = outputs.readlines();
+</code></pre>
+
+<p>The <code>file</code> type has the reserved, built-in function <code>readlines()</code> that reads the entire contents of a <code>file</code> into a <code>string</code> array. (In this case, we can put those results directly into an <code>output</code> array, since <code>output</code>s take <code>string</code>s.) The trailing newline character is stripped from each string as each line is copied to the array. This allows the user to easily load sets of <code>input</code>s and <code>output</code>s from ASCII text files into string arrays for use in a svelTest program.   </p>
+
 <h1>
 <a name="return--assert" class="anchor" href="#return--assert"><span class="octicon octicon-link"></span></a>Return &amp; Assert</h1>
 
-<pre><code>return helloMain.assert(in, out);
+<h4>
+<a name="lets-return-to-our-discussion-of-hellojavasvel" class="anchor" href="#lets-return-to-our-discussion-of-hellojavasvel"><span class="octicon octicon-link"></span></a>Let’s return to our discussion of <code>helloJava.svel</code>.</h4>
+
+<pre><code>return helloMain.assert(_in, out);
 </code></pre>
 
-<p>The <code>helloWorldTest()</code> function declaration requires it to return a <code>boolean</code>. When the <code>assert</code> statement is called on a <code>funct</code>, it uses the input and output parameters to test the method. <code>assert</code> then returns either <code>true</code> or <code>false</code> depending if the expected output matches the method’s console output. </p>
+<p>The <code>helloWorldTest()</code> function must return a <code>boolean</code>. When the <code>assert()</code> function is called on a <code>funct</code>, it uses the <code>input</code> and <code>output</code> parameters to test the method. <code>assert()</code> then returns either true or false depending if the expected output matches the method’s standard output. </p>
+
+<h3>
+<a name="verbose" class="anchor" href="#verbose"><span class="octicon octicon-link"></span></a>verbose</h3>
+
+<p><code>assert()</code> also has an optional third argument, <code>verbose</code>. Specifying <code>verbose</code> as the third argument adds additional functionality to <code>assert()</code>: instead of just returning true or false, <code>assert()</code> will also print test information to standard output for you. For example, something like</p>
+
+<pre><code>helloMain.assert(_in, out, verbose);
+</code></pre>
+
+<p>would print</p>
+
+<pre><code>main()...       PASS
+</code></pre>
+
+<p>without any additional code.</p>
 
 <h1>
 <a name="main" class="anchor" href="#main"><span class="octicon octicon-link"></span></a>Main</h1>
 
-<pre><code>main()
-{
-...
-}
-</code></pre>
+<div class="highlight highlight-java"><pre><span class="n">main</span><span class="o">(){</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</pre></div>
 
 <p>Each svelTest file is required to have a <code>main</code> method. It should be at the bottom of the file, after the methods it calls are declared.</p>
 
@@ -222,22 +281,20 @@
 <a name="ifelse" class="anchor" href="#ifelse"><span class="octicon octicon-link"></span></a>If/Else</h1>
 
 <div class="highlight highlight-java"><pre><span class="k">if</span> <span class="o">(</span><span class="n">helloWorldTest</span><span class="o">())</span> <span class="o">{</span>
-    <span class="n">print</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span> <span class="n">passed</span><span class="o">!</span><span class="err">”</span><span class="o">;</span>
+    <span class="n">print</span><span class="o">(</span><span class="s">"Hello World passed!"</span><span class="o">);</span>
 <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="n">print</span> <span class="err">“</span><span class="n">Hello</span> <span class="n">World</span> <span class="n">failed</span><span class="o">.</span><span class="err">”</span><span class="o">;</span>
+    <span class="n">print</span><span class="o">(</span><span class="s">"Hello World failed."</span><span class="o">);</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>This is a standard <code>if/else</code> statement that tells the program what to do in case of success or failure. If <code>helloWorldTest()</code> returns <code>true</code> (the <code>assert</code> test matches), it will print “Hello World passed!” to the console. If not, it will print “Hello World failed.”</p>
+<p>This is a standard if/else statement that tells the program what to do in case of success or failure. If <code>helloWorldTest()</code> returns true (the <code>assert</code> test matches), it will print “Hello World passed!” to standard output. If not, it will print “Hello World failed.”</p>
 
 <h1>
 <a name="another-example-add" class="anchor" href="#another-example-add"><span class="octicon octicon-link"></span></a>Another Example: Add</h1>
 
 <p>Consider the following Java file that contains a method to add two Java integers:</p>
 
-<div class="highlight highlight-java"><pre><span class="cm">/* </span>
-<span class="cm"> * Add.java</span>
-<span class="cm"> */</span>
+<div class="highlight highlight-java"><pre><span class="c1">// Add.java</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Add</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
@@ -253,91 +310,120 @@
 
 <p>Suppose you wanted to make sure that just the function <code>add()</code> worked correctly. You want to check multiple cases and track which tests it passes. A svelTest program to test the <code>add()</code> function would look like this:</p>
 
-<div class="highlight highlight-java"><pre><span class="cm">/*</span>
-<span class="cm"> * add.svel</span>
-<span class="cm"> * test suite for add function in Add.java</span>
-<span class="cm"> */</span>
+<div class="highlight highlight-java"><pre><span class="c1">// add.svel</span>
 
-<span class="kt">int</span> <span class="nf">addTestSuite</span><span class="o">()</span> 
-<span class="o">{</span>
+<span class="c1">// test suite for add function in Add.java</span>
+<span class="n">lang</span> <span class="o">=</span> <span class="n">Java</span><span class="o">;</span>
+<span class="kt">int</span> <span class="nf">addTestSuite</span><span class="o">()</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">addSuccessCounter</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 
-    <span class="cm">/* svelTest test idiom:</span>
-<span class="cm">        1. declare a file</span>
-<span class="cm">        2. declare a funct (ie: the source program or method to test)</span>
-<span class="cm">        3. create input(s) and corresponding output(s)</span>
-<span class="cm">        4. call assert() on the funct with the input(s) and output(s)</span>
-<span class="cm">    */</span>
-    <span class="n">file</span> <span class="n">addFile</span> <span class="o">=</span> <span class="err">“</span><span class="n">Add</span><span class="o">.</span><span class="na">java</span><span class="err">”</span><span class="o">;</span>
-    <span class="n">funct</span> <span class="n">add</span> <span class="o">=</span> <span class="o">{</span><span class="err">“</span><span class="n">add</span><span class="err">”</span><span class="o">,</span> <span class="o">(</span><span class="n">j_int</span><span class="o">,</span> <span class="n">j_int</span><span class="o">),</span> <span class="n">addFile</span><span class="o">};</span>
+    <span class="c1">// svelTest test idiom:</span>
+    <span class="c1">//  1. declare a file</span>
+    <span class="c1">//  2. declare a funct (ie: the source program or method to test)</span>
+    <span class="c1">//  3. create input(s) and corresponding output(s)</span>
+    <span class="c1">//  4. call assert() on the funct with the input(s) and output(s)</span>
+
+    <span class="n">file</span> <span class="n">addFile</span> <span class="o">=</span> <span class="s">"Add.java"</span><span class="o">;</span>
+    <span class="n">funct</span> <span class="n">add</span> <span class="o">=</span> <span class="o">{</span><span class="s">"add"</span><span class="o">,</span> <span class="o">(</span><span class="n">j_int</span><span class="o">,</span> <span class="n">j_int</span><span class="o">),</span> <span class="n">addFile</span><span class="o">};</span>
     <span class="n">input</span> <span class="n">in1</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
     <span class="n">output</span> <span class="n">out1</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
     <span class="n">input</span> <span class="n">in2</span> <span class="o">=</span> <span class="o">(-</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
     <span class="n">output</span> <span class="n">out2</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
     <span class="n">input</span><span class="o">[]</span> <span class="n">inArray</span> <span class="o">=</span> <span class="o">{</span><span class="n">in1</span><span class="o">,</span> <span class="n">in2</span><span class="o">};</span>
-    <span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span><span class="o">;</span>
-    <span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out1</span><span class="o">);</span>
-    <span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out2</span><span class="o">);</span>
+    <span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span> <span class="o">=</span> <span class="o">{};</span>
 
-    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
-    <span class="o">{</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
-            <span class="n">addSuccessCounter</span><span class="o">++;</span>
+    <span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">out1</span><span class="o">);</span>
+    <span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">out2</span><span class="o">);</span>
+
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+            <span class="n">addSuccessCounter</span> <span class="o">=</span> <span class="n">addSuccessCounter</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
         <span class="o">}</span>
     <span class="o">}</span>
 
     <span class="k">return</span> <span class="n">addSuccessCounter</span><span class="o">;</span>
 <span class="o">}</span>
 
-<span class="n">main</span><span class="o">()</span>
-<span class="o">{</span>
+<span class="n">main</span><span class="o">()</span> <span class="o">{</span>
     <span class="kt">int</span> <span class="n">successNumber</span> <span class="o">=</span> <span class="n">addTestSuite</span><span class="o">();</span>
 
-    <span class="k">if</span> <span class="o">(</span><span class="n">successNumber</span> <span class="o">==</span> <span class="mi">2</span><span class="o">){</span>
-        <span class="n">print</span> <span class="err">“</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="n">cases</span> <span class="n">are</span> <span class="n">successful</span><span class="err">”</span><span class="o">;</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">successNumber</span> <span class="o">==</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">print</span><span class="o">(</span><span class="s">"2/2 cases are successful"</span><span class="o">);</span>
     <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-        <span class="n">print</span> <span class="err">“</span><span class="n">method</span> <span class="n">did</span> <span class="n">not</span> <span class="n">work</span> <span class="n">as</span> <span class="n">intended</span><span class="err">”</span><span class="o">;</span>
+        <span class="n">print</span><span class="o">(</span><span class="s">"method did not work as intended"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>The method <code>addTestSuite()</code>, is declared with a return type of <code>int</code>. It declares an int called <code>addSuccessCounter</code> and initializes it to zero. It then specifies the location of <code>Add.java</code> with a <code>file</code> and creates a <code>funct</code> to test the <code>add()</code> function, which takes two Java integers (<code>j_int</code>) as parameters. </p>
+<p>The method <code>addTestSuite()</code> is declared with a return type of <code>int</code>. It declares an <code>int</code> called <code>addSuccessCounter</code> and initializes it to zero. It then specifies the location of <code>Add.java</code> with a <code>file</code> and creates a <code>funct</code> to test the <code>add()</code> function, which takes two Java integers (<code>j_int</code>) as parameters. </p>
 
 <h1>
 <a name="arrays" class="anchor" href="#arrays"><span class="octicon octicon-link"></span></a>Arrays</h1>
 
 <p>Arrays can be instantiated directly or dynamically.</p>
 
-<pre><code>input in1 = (1, 2);
-output out1 = 3;
-input in2 = (-2, 2);
-output out2 = 0;
-input[] inArray = {in1, in2};
-output[] outArray;
-outArray.append(out1);
-outArray.append(out2);
-</code></pre>
+<div class="highlight highlight-java"><pre><span class="n">input</span> <span class="n">in1</span> <span class="o">=</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<span class="n">output</span> <span class="n">out1</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+<span class="n">input</span> <span class="n">in2</span> <span class="o">=</span> <span class="o">(-</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+<span class="n">output</span> <span class="n">out2</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="n">input</span><span class="o">[]</span> <span class="n">inArray</span> <span class="o">=</span> <span class="o">{</span><span class="n">in1</span><span class="o">,</span> <span class="n">in2</span><span class="o">};</span>
+<span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span> <span class="o">=</span> <span class="o">{};</span>
+<span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">out1</span><span class="o">);</span>
+<span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">out2</span><span class="o">);</span>
+</pre></div>
 
-<p>In this section we create two <code>input</code>s that have two <code>int</code>s enclosed in parentheses and separated by commas. We also make two corresponding <code>output</code>s. The following lines show how to add objects to arrays. In the <code>input</code> array, we add the already created objects to <code>inArray</code> in the same line as the declaration. In the <code>output</code> array, we declare the array and use <code>append()</code> to add the two <code>output</code>s to the end of the array.</p>
+<p>In this section we create two <code>input</code>s that have two <code>int</code>s enclosed in parentheses and separated by commas. We also make two corresponding <code>output</code>s. The following lines show how to add objects to arrays. In the input array, we add the already created objects to <code>inArray</code> in the same line as the declaration. In the output array, we declare the array and use <code>insert()</code> to add the two <code>output</code>s into the array. Note that we must initialize <code>outArray</code> as empty with curly brackets in order to insert values into it.</p>
 
-<div class="highlight highlight-java"><pre><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span>
-<span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">])){</span>
+<div class="highlight highlight-java"><pre><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
         <span class="n">addSuccessCounter</span><span class="o">++;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
-<p>svelTest supports for loops that have 3 parameters: one that initializes a counter, a boolean expression, and an incrementer. This boolean expression uses <code>size()</code> to compare <code>i</code> with the number of elements in the array. The <code>for</code> loop contains an <code>if</code> statement to check each element of the <code>input</code> array against the corresponding element with the same index of the <code>output</code> array. If the test evaluates as <code>true</code>, <code>addSuccessCounter</code> will increment. </p>
+<p>svelTest supports <code>for</code> loops that have 3 parameters: one that initializes a counter, a boolean expression, and an incrementer. This boolean expression uses <code>size()</code> to compare <code>i</code> with the number of elements in the array. The <code>for</code> loop contains an <code>if</code> statement to check each element of the <code>input</code> array against the corresponding element with the same index of the <code>output</code> array. If the test evaluates as true, <code>addSuccessCounter</code> will increment. </p>
 
 <p>The end of the method returns <code>addSuccessCounter</code>.</p>
 
-<p>The <code>main</code> method of this <code>.svel</code> file runs <code>addTestSuite</code> and prints out that the cases were successful if it passed two out of two tests.</p>
+<p>The <code>main</code> method of this .svel file runs <code>addTestSuite()</code> and prints out that the cases were successful if it passed two out of two tests.</p>
+
+<h1>
+<a name="writing-svelter-code-looking-at-add-again" class="anchor" href="#writing-svelter-code-looking-at-add-again"><span class="octicon octicon-link"></span></a>Writing Svelter Code: Looking at Add Again</h1>
+
+<p>You might notice that our <code>add.svel</code> program looks a little bulky: only 10 lines of Java code to test led to over 40 lines of svelTest code. The <code>add.svel</code> program was intentionally written to be very clear, but a lot of the idioms can be condensed. Take a look at our svelter version:</p>
+
+<div class="highlight highlight-java"><pre><span class="c1">// addSvelter.svel</span>
+
+<span class="c1">// more succinct test suite for add function in Add.java</span>
+<span class="n">lang</span> <span class="o">=</span> <span class="n">Java</span><span class="o">;</span>
+
+<span class="n">main</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">funct</span> <span class="n">add</span> <span class="o">=</span> <span class="o">{</span><span class="s">"add"</span><span class="o">,</span> <span class="o">(</span><span class="n">j_int</span><span class="o">,</span> <span class="n">j_int</span><span class="o">),</span> <span class="s">"Add.java"</span><span class="o">};</span>
+    <span class="n">input</span><span class="o">[]</span> <span class="n">inArray</span> <span class="o">=</span> <span class="o">{(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(-</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)};</span>
+    <span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span> <span class="o">=</span> <span class="o">{</span><span class="mi">3</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">10</span><span class="o">};</span>
+
+    <span class="c1">// the third test case should fail (4+5 != 10)</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">verbose</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Hopefully you can convince yourself that you’ll see the following output:</p>
+
+<pre><code>add(1, 2)...                     PASS
+add(-2, 2)...                    PASS
+add(4, 5)...                     FAIL
+    returned: 9
+    expected: 10
+</code></pre>
+
+<p>If you don’t believe us, give it a try yourself! As you can see, only 10 lines of code now successfully run three test cases.</p>
 
 <h1>
 <a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h1>
 
-<p>This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. As stated previously, please see our Language Reference Manual for a more comprehensive analysis of the features of svelTest.</p>
+<p>This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. Although we only used Java in this tutorial, writing your own svelTest programs to test C and Python should be nearly identical, but check out the Reference Manual for more extensive discussion. As stated previously, please see our <a href="https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing">Language Reference Manual</a> for a more comprehensive analysis of the features of svelTest.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
