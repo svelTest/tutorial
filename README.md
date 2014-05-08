@@ -39,11 +39,12 @@ svelTest does not require any outside packages or installers. The compiler was d
 To get familiar with svelTest syntax, we can look at the svelTest’s interpretation of Hello World. This program prints “Hello World!” to the console.
 
 ```java
-//hello.svel
-//prints ‘Hello World!’ to console 
+// hello.svel
+
+// prints "Hello World!" to console 
 lang = None;
 main() {
-	string hello = “Hello World!”;
+	string hello = "Hello World!";
 	print(hello);
 }
 ```
@@ -56,11 +57,12 @@ Though `hello.svel` is a valid svelTest program, it does not really show what th
 
 
 ```java
-//Hello.java
-//prints ‘Hello World!’ to console
+// Hello.java
+
+// prints "Hello World!" to console
 public class Hello {
 	public static void main (String args[]) {
-		String hello = “Hello World!”;
+		String hello = "Hello World!";
 		System.out.println(hello);
 	}
 }
@@ -68,8 +70,9 @@ public class Hello {
 A svelTest program to test the output of `Hello.java` (which should be “Hello World!”) would look like this:
 
 ```java
-//helloJava.svel
-//tests Hello.java
+// helloJava.svel
+
+// tests Hello.java
 lang = Java;
 
 boolean helloWorldTest() {
@@ -134,7 +137,7 @@ Functions in svelTest must also be fully defined before they are used. Note that
 
 # File
 
-	file helloFile = “../Hello.java”;
+	file helloFile = "../Hello.java";
 
 `file` is used to select the file you want to test; it is followed by the object name. On the right side of the equals, the name of the file is entered as a string literal. In this case, we’re making a `file` object called `helloFile` and indicating that the `Hello.java` file is one directory above the svelTest program.
 
@@ -157,7 +160,7 @@ The `funct` type is easy to use and declare.
 
 # Output
 
-	output out = “Hello World!”;
+	output out = "Hello World!";
 
 `output` is use to denote the expected output of the method you are testing. An `output` can take the value of any type in the source programming language.
 
@@ -165,7 +168,7 @@ The `funct` type is easy to use and declare.
 ####While we don’t use `readlines()` in our `helloJava.svel` program, we want to cover it briefly in our discussion of file I/O. 
 Take a look at the following snippet:
 
-	file outputs = “outputs.txt”;
+	file outputs = "outputs.txt";
 	output[] out = outputs.readlines();
 
 The `file` type has the reserved, built-in function `readlines()` that reads the entire contents of a `file` into a `string` array. (In this case, we can put those results directly into an `output` array, since `output`s take `string`s.) The trailing newline character is stripped from each string as each line is copied to the array. This allows the user to easily load sets of `input`s and `output`s from ASCII text files into string arrays for use in a svelTest program.	
@@ -202,9 +205,9 @@ Each svelTest file is required to have a `main` method. It should be at the bott
 
 ```java
 if (helloWorldTest()) {
-	print(“Hello World passed!”);
+	print("Hello World passed!");
 } else {
-	print(“Hello World failed.”);
+	print("Hello World failed.");
 }
 ```
 
@@ -215,7 +218,7 @@ This is a standard if/else statement that tells the program what to do in case o
 Consider the following Java file that contains a method to add two Java integers:
 
 ```java
-//Add.java
+// Add.java
 
 public class Add {
 	public static void main(String[] args) {
@@ -231,9 +234,9 @@ public class Add {
 Suppose you wanted to make sure that just the function `add()` worked correctly. You want to check multiple cases and track which tests it passes. A svelTest program to test the `add()` function would look like this:
 
 ```java
-///add.svel
+// add.svel
 
-//test suite for add function in Add.java
+// test suite for add function in Add.java
 lang = Java;
 int addTestSuite() {
 	int addSuccessCounter = 0;
@@ -296,7 +299,7 @@ In this section we create two `input`s that have two `int`s enclosed in parenthe
 ```java
 for(int i = 0; i < inArray.size(); i++) {
 		if (add.assert(inArray[i], outArray[i])) {
-	addSuccessCounter++;
+		addSuccessCounter++;
 	}
 }
 ```
@@ -311,9 +314,9 @@ The `main` method of this .svel file runs `addTestSuite()` and prints out that t
 You might notice that our `add.svel` program looks a little bulky: only 10 lines of Java code to test led to over 40 lines of svelTest code. The `add.svel` program was intentionally written to be very clear, but a lot of the idioms can be condensed. Take a look at our svelter version:
 
 ```java
-//addSvelter.svel
+// addSvelter.svel
 
-//more succinct test suite for add function in Add.java
+// more succinct test suite for add function in Add.java
 lang = Java;
 
 main() {
