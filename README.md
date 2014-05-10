@@ -8,7 +8,7 @@ This tutorial will serve as a quick guide for getting svelTest programs up and r
 4. [File](#file)
 5. [Funct](#funct)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;5.1 [What the Funct?](#what-the-funct)
-6. [I/O](#io)
+6. [I/O](#io)L
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.1 [Input](#input)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [Output](#output)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [readlines()](#readlines)
@@ -28,7 +28,7 @@ The svelTest programming language aims to simplify the complex process of testin
 
 The purpose of this tutorial is to introduce the user to the basics of svelTest, allowing them to easily pick up svelTest syntax and code style. These examples concentrate on the basics of the language like variable declaration, arithmetic operations, loading source code files, and manipulating test case output.
 
-It is important for the user to understand that this is not a complete tutorial on svelTest. Like any programming language, practice makes a great programmer. For more in-depth information on the intricacies of svelTest, please refer to our Language Reference Manual.
+It is important for the user to understand that this is not a complete tutorial on svelTest. Like any programming language, practice makes a great programmer. For more in-depth information on the intricacies of svelTest, please refer to our [Language Reference Manual](http://sveltest.github.io/manual/).
 
 Remember to have fun, and you’ll be writing svelte code before you know it!
 
@@ -156,7 +156,7 @@ The `funct` type is easy to use and declare.
 
 	input _in = ();
 
-`input` is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of `Hello.java` does not take any parameters. Note that we cannot call this input `in` but instead must call it `_in`; this is because `in` is a reserved keyword in svelTest programs. (See our [Reference Manual](https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing) for a full list of reserved words.)
+`input` is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of `Hello.java` does not take any parameters. Note that we cannot call this input `in` but instead must call it `_in`; this is because `in` is a reserved keyword in svelTest programs. (See our [Language Reference Manual](http://sveltest.github.io/manual/) for a full list of reserved words.)
 
 # Output
 
@@ -351,4 +351,4 @@ If you don’t believe us, give it a try yourself! As you can see, only 10 lines
 
 # Conclusion
 
-This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. Although we only used Java in this tutorial, writing your own svelTest programs to test C and Python should be nearly identical, but check out the Reference Manual for more extensive discussion. As stated previously, please see our [Language Reference Manual](https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing) for a more comprehensive analysis of the features of svelTest.
+This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. Although we only used Java in this tutorial, writing your own svelTest programs to test C and Python should be nearly identical, but check out the Reference Manual for more extensive discussion. As stated previously, please see our [Language Reference Manual](http://sveltest.github.io/manual/) for a more comprehensive analysis of the features of svelTest.
