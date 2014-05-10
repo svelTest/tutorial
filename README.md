@@ -11,7 +11,7 @@ This tutorial will serve as a quick guide for getting svelTest programs up and r
 6. [I/O](#io)L
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.1 [Input](#input)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [Output](#output)
-<br>&nbsp;&nbsp;&nbsp;&nbsp;6.2 [readlines()](#readlines)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;6.3 [readlines()](#readlines)
 7. [Return & Assert](#return--assert)
 <br>&nbsp;&nbsp;&nbsp;&nbsp;7.1 [verbose](#verbose)
 8. [Main](#main)
