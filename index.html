@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>SvelTest Language Tutorial by svelTest</title>
+    <title>svelTest Language Tutorial by svelTest</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -16,7 +16,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1 class="header">SvelTest Language Tutorial</h1>
+        <h1 class="header">svelTest Language Tutorial</h1>
         <p class="header">PLT Spring 2014</p>
 
         <ul>
@@ -48,10 +48,10 @@
 <br>    5.1 <a href="#what-the-funct">What the Funct?</a>
 </li>
 <li>
-<a href="#io">I/O</a>
+<a href="#io">I/O</a>L
 <br>    6.1 <a href="#input">Input</a>
 <br>    6.2 <a href="#output">Output</a>
-<br>    6.2 <a href="#readlines">readlines()</a>
+<br>    6.3 <a href="#readlines">readlines()</a>
 </li>
 <li>
 <a href="#return--assert">Return &amp; Assert</a>
@@ -72,7 +72,7 @@
 
 <p>The purpose of this tutorial is to introduce the user to the basics of svelTest, allowing them to easily pick up svelTest syntax and code style. These examples concentrate on the basics of the language like variable declaration, arithmetic operations, loading source code files, and manipulating test case output.</p>
 
-<p>It is important for the user to understand that this is not a complete tutorial on svelTest. Like any programming language, practice makes a great programmer. For more in-depth information on the intricacies of svelTest, please refer to our Language Reference Manual.</p>
+<p>It is important for the user to understand that this is not a complete tutorial on svelTest. Like any programming language, practice makes a great programmer. For more in-depth information on the intricacies of svelTest, please refer to our <a href="http://sveltest.github.io/manual/">Language Reference Manual</a>.</p>
 
 <p>Remember to have fun, and you’ll be writing svelte code before you know it!</p>
 
@@ -217,7 +217,7 @@ python helloJava.py
 <pre><code>input _in = ();
 </code></pre>
 
-<p><code>input</code> is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of <code>Hello.java</code> does not take any parameters. Note that we cannot call this input <code>in</code> but instead must call it <code>_in</code>; this is because <code>in</code> is a reserved keyword in svelTest programs. (See our <a href="https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing">Reference Manual</a> for a full list of reserved words.)</p>
+<p><code>input</code> is used to denote the input required by the method being tested. Multiple parameters should be separated by commas.  In this case, it is empty because the main method of <code>Hello.java</code> does not take any parameters. Note that we cannot call this input <code>in</code> but instead must call it <code>_in</code>; this is because <code>in</code> is a reserved keyword in svelTest programs. (See our <a href="http://sveltest.github.io/manual/">Language Reference Manual</a> for a full list of reserved words.)</p>
 
 <h1>
 <a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output</h1>
@@ -332,8 +332,8 @@ output[] out = outputs.readlines();
     <span class="n">input</span><span class="o">[]</span> <span class="n">inArray</span> <span class="o">=</span> <span class="o">{</span><span class="n">in1</span><span class="o">,</span> <span class="n">in2</span><span class="o">};</span>
     <span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span> <span class="o">=</span> <span class="o">{};</span>
 
-    <span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">out1</span><span class="o">);</span>
-    <span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">out2</span><span class="o">);</span>
+    <span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out1</span><span class="o">);</span>
+    <span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out2</span><span class="o">);</span>
 
     <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
@@ -368,11 +368,11 @@ output[] out = outputs.readlines();
 <span class="n">output</span> <span class="n">out2</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
 <span class="n">input</span><span class="o">[]</span> <span class="n">inArray</span> <span class="o">=</span> <span class="o">{</span><span class="n">in1</span><span class="o">,</span> <span class="n">in2</span><span class="o">};</span>
 <span class="n">output</span><span class="o">[]</span> <span class="n">outArray</span> <span class="o">=</span> <span class="o">{};</span>
-<span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">out1</span><span class="o">);</span>
-<span class="n">outArray</span><span class="o">.</span><span class="na">insert</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">out2</span><span class="o">);</span>
+<span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out1</span><span class="o">);</span>
+<span class="n">outArray</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">out2</span><span class="o">);</span>
 </pre></div>
 
-<p>In this section we create two <code>input</code>s that have two <code>int</code>s enclosed in parentheses and separated by commas. We also make two corresponding <code>output</code>s. The following lines show how to add objects to arrays. In the input array, we add the already created objects to <code>inArray</code> in the same line as the declaration. In the output array, we declare the array and use <code>insert()</code> to add the two <code>output</code>s into the array. Note that we must initialize <code>outArray</code> as empty with curly brackets in order to insert values into it.</p>
+<p>In this section we create two <code>input</code>s that have two <code>int</code>s enclosed in parentheses and separated by commas. We also make two corresponding <code>output</code>s. The following lines show how to add objects to arrays. In the input array, we add the already created objects to <code>inArray</code> in the same line as the declaration. In the output array, we declare the array and use <code>append()</code> to add the two <code>output</code>s to the end of the array. Note that we must initialize <code>outArray</code> as empty with curly brackets in order to append or insert values into it.</p>
 
 <div class="highlight highlight-java"><pre><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">inArray</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">add</span><span class="o">.</span><span class="na">assert</span><span class="o">(</span><span class="n">inArray</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">outArray</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
@@ -387,7 +387,15 @@ output[] out = outputs.readlines();
 
 <p>The <code>main</code> method of this .svel file runs <code>addTestSuite()</code> and prints out that the cases were successful if it passed two out of two tests.</p>
 
-<h1>
+<p>A last note on arrays: Other supported array functions are <code>remove()</code>, <code>insert()</code>, <code>size()</code>, and <code>replace()</code>. The prototypes are outlined below:</p>
+
+<ul>
+<li>
+<code>a.remove(int index)</code> </li>
+<li><code>a.insert(int index, object o)</code></li>
+<li><code>a.size()</code></li>
+<li><code>a.replace(int index, object o)</code></li>
+</ul><h1>
 <a name="writing-svelter-code-looking-at-add-again" class="anchor" href="#writing-svelter-code-looking-at-add-again"><span class="octicon octicon-link"></span></a>Writing Svelter Code: Looking at Add Again</h1>
 
 <p>You might notice that our <code>add.svel</code> program looks a little bulky: only 10 lines of Java code to test led to over 40 lines of svelTest code. The <code>add.svel</code> program was intentionally written to be very clear, but a lot of the idioms can be condensed. Take a look at our svelter version:</p>
@@ -423,7 +431,7 @@ add(4, 5)...                     FAIL
 <h1>
 <a name="conclusion" class="anchor" href="#conclusion"><span class="octicon octicon-link"></span></a>Conclusion</h1>
 
-<p>This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. Although we only used Java in this tutorial, writing your own svelTest programs to test C and Python should be nearly identical, but check out the Reference Manual for more extensive discussion. As stated previously, please see our <a href="https://docs.google.com/document/d/1sn5K1YFt0yfNsU4QQjW1xewVx-IlDh8yKmCrAinI2wY/edit?usp=sharing">Language Reference Manual</a> for a more comprehensive analysis of the features of svelTest.</p>
+<p>This Language Tutorial covers the basic capabilities of the svelTest programming language. We hope that this tutorial will be useful in assisting users in writing their own, more complex, testing programs. Although we only used Java in this tutorial, writing your own svelTest programs to test C and Python should be nearly identical, but check out the Reference Manual for more extensive discussion. As stated previously, please see our <a href="http://sveltest.github.io/manual/">Language Reference Manual</a> for a more comprehensive analysis of the features of svelTest.</p>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
